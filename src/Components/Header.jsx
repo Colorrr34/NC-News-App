@@ -1,8 +1,12 @@
+import { Link } from "react-router";
+
 export default function Header(props) {
   const { user } = props;
   return (
     <header>
-      <h1>NC News</h1>
+      <Link to="/">
+        <h1>NC News</h1>
+      </Link>
       <section className="user-banner">
         <p>{user}</p>
       </section>

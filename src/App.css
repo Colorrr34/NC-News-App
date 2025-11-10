@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 /* header */
 
 header {
@@ -33,10 +37,6 @@ aside li {
   align-self: center;
 }
 
-aside a {
-  text-decoration: none;
-}
-
 aside p {
   margin-bottom: 0px;
   margin-top: 0px;
@@ -47,6 +47,11 @@ aside p {
 main {
   grid-column: 2 / 3;
   grid-row: 1 / span 2;
+}
+
+main a {
+  text-decoration: none;
+  color: black;
 }
 
 main section {
