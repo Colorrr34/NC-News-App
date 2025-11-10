@@ -1,6 +1,52 @@
+/* header */
+
 header {
   display: flex;
   justify-content: space-between;
+}
+
+/* main page */
+
+.main-body-container {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 1fr 2fr;
+}
+
+/* side bar */
+
+aside {
+  grid-column: 1 / 2;
+  grid-row: 1/2;
+}
+
+aside ul {
+  list-style: none;
+  padding-inline-start: 0px;
+}
+
+aside li {
+  padding: 5px;
+  border: 2px solid;
+  margin: 5px;
+  height: 20px;
+  align-self: center;
+}
+
+aside a {
+  text-decoration: none;
+}
+
+aside p {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+/* main body */
+
+main {
+  grid-column: 2 / 3;
+  grid-row: 1 / span 2;
 }
 
 main section {
