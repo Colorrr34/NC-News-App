@@ -183,6 +183,13 @@ main section h2 {
   padding-left: 10px;
 }
 
+/* create comment */
+#comment-input {
+  height: 100px;
+  width: 500px;
+  overflow: auto;
+}
+
 /* comments */
 
 .comment-section {

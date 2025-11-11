@@ -3,9 +3,11 @@ import fetchArticle from "../fetch/fetchArticle";
 import { useState, useEffect } from "react";
 import Nav from "../Components/Nav";
 import Comments from "./ArticleComponents/Comments";
+import CreateComment from "./ArticleComponents/CreateComment";
 import { upvoteArticle, downvoteArticle } from "../fetch/voteArticles";
 
-export default function ArticleBody() {
+export default function ArticleBody(props) {
+  const { user } = props;
   const { id: articleId } = useParams();
 
   const [topic, setTopic] = useState("");
@@ -16,6 +18,8 @@ export default function ArticleBody() {
   const [commentCount, setCommentCount] = useState(0);
   const [createdAt, setCreatedAt] = useState("");
   const [votes, setVotes] = useState(0);
+
+  const [isCreatingComment, setIsCreatingComment] = useState(false);
 
   useEffect(() => {
     fetchArticle(articleId).then(({ data }) => {
@@ -58,7 +62,15 @@ export default function ArticleBody() {
           <Link to="comments">Read comments:({commentCount})</Link>
         </li>
         <li>
-          <Link to="comments/create">create a comment</Link>
+          <label htmlFor="create-comment" />
+          <button
+            id="create-comment"
+            onClick={() => {
+              setIsCreatingComment(true);
+            }}
+          >
+            create a comment
+          </button>
         </li>
         <li>
           <label htmlFor="article-upvote">
@@ -86,7 +98,8 @@ export default function ArticleBody() {
         </li>
         <li>{votes}</li>
       </ul>
-      <Comments articleId={articleId} />
+      {isCreatingComment ? <CreateComment user={user} /> : null}
+      <Comments />
     </div>
   );
 }

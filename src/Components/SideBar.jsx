@@ -10,7 +10,7 @@ export default function SideBar() {
     fetchTopics().then(({ data }) => {
       setTopics(data.topics);
     });
-  });
+  }, []);
 
   return (
     <aside key="topics-sidebar" id="topics-sidebar">

@@ -18,14 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<MainBody />} />
             <Route path="/articles" element={<MainBody />} />
-            <Route
-              path="/articles/:id"
-              element={
-                <>
-                  <ArticleBody />
-                </>
-              }
-            />
+            <Route path="/articles/:id" element={<ArticleBody user={user} />} />
           </Routes>
         </div>
       </div>

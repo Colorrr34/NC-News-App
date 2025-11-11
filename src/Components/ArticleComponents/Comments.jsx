@@ -1,8 +1,9 @@
 import fetchArticleComments from "../../fetch/fetchArticleComments";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router";
 
 export default function Comments(props) {
-  const { articleId } = props;
+  const { id: articleId } = useParams();
 
   const [comments, setComments] = useState([]);
 
