@@ -11,12 +11,15 @@ export default function MainBody() {
   const [pages, setPages] = useState([]);
   const [topic, setTopic] = useState("all");
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     setCurrentPage(searchParams.get("p") || 1);
     setTopic(searchParams.get("topic") || "all");
   }, [searchParams]);
 
   useEffect(() => {
+    setIsLoading(true);
     fetchArticles(sortBy, order, currentPage, topic).then(({ data }) => {
       const totalPages = Math.ceil(data.total_count / 10);
       const pages = [];
@@ -25,6 +28,7 @@ export default function MainBody() {
       }
       setPages(pages);
       setArticles(data.articles);
+      setIsLoading(false);
     });
   }, [sortBy, order, currentPage, topic]);
 
@@ -52,30 +56,38 @@ export default function MainBody() {
           <option value="asc">ascending</option>
           <option value="desc">descending</option>
         </select>
-        {articles.map((article) => {
-          const date = new Date(article.created_at);
+        {isLoading ? (
+          <section id="loading-section">
+            <h2>Loading...</h2>
+          </section>
+        ) : (
+          articles.map((article) => {
+            const date = new Date(article.created_at);
 
-          return (
-            <Link
-              to={`/articles/${article.article_id}`}
-              key={article.article_id}
-            >
-              <section id={article.article_id}>
-                <h2>{article.title}</h2>
-                <p className="article-info">
-                  author: {article.author} | comments: {article.comment_count} |
-                  votes: {article.votes}
-                </p>
-                <p className="created-at">Created at: {date.toDateString()}</p>
-                <img
-                  src={article.article_img_url}
-                  alt="article-image"
-                  className="homepage-article-image"
-                />
-              </section>
-            </Link>
-          );
-        })}
+            return (
+              <Link
+                to={`/articles/${article.article_id}`}
+                key={article.article_id}
+              >
+                <section id={article.article_id}>
+                  <h2>{article.title}</h2>
+                  <p className="article-info">
+                    author: {article.author} | comments: {article.comment_count}{" "}
+                    | votes: {article.votes}
+                  </p>
+                  <p className="created-at">
+                    Created at: {date.toDateString()}
+                  </p>
+                  <img
+                    src={article.article_img_url}
+                    alt="article-image"
+                    className="homepage-article-image"
+                  />
+                </section>
+              </Link>
+            );
+          })
+        )}
 
         <ul className="main-page-list">
           {pages.map((page) => {

@@ -4,9 +4,9 @@ export default function Footer() {
   return (
     <footer>
       <p>
-        Please visit my github for more projects that I have built:
+        Please visit my github for more projects that I have built
         <Link to="https://github.com/Colorrr34" id="github-link">
-          GitHub
+          : GitHub
         </Link>
       </p>
     </footer>

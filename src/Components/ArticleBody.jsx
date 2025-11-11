@@ -3,6 +3,7 @@ import fetchArticle from "../fetch/fetchArticle";
 import { useState, useEffect } from "react";
 import Nav from "../Components/Nav";
 import Comments from "./ArticleComponents/Comments";
+import { upvoteArticle, downvoteArticle } from "../fetch/voteArticles";
 
 export default function ArticleBody() {
   const { id: articleId } = useParams();
@@ -14,6 +15,7 @@ export default function ArticleBody() {
   const [body, setBody] = useState("");
   const [commentCount, setCommentCount] = useState(0);
   const [createdAt, setCreatedAt] = useState("");
+  const [votes, setVotes] = useState(0);
 
   useEffect(() => {
     fetchArticle(articleId).then(({ data }) => {
@@ -25,6 +27,7 @@ export default function ArticleBody() {
         article_img_url,
         created_at,
         comment_count,
+        votes,
       } = data;
 
       setTitle(title);
@@ -35,6 +38,7 @@ export default function ArticleBody() {
       setCommentCount(comment_count);
       const date = new Date(created_at);
       setCreatedAt(date.toDateString());
+      setVotes(votes);
     });
   }, []);
 
@@ -49,9 +53,39 @@ export default function ArticleBody() {
         <img src={imageUrl} alt="article-image" />
         <p>{body}</p>
       </section>
-      <Link to="comments">
-        <p>Read comments:({commentCount})</p>
-      </Link>
+      <ul>
+        <li>
+          <Link to="comments">Read comments:({commentCount})</Link>
+        </li>
+        <li>
+          <Link to="comments/create">create a comment</Link>
+        </li>
+        <li>
+          <label htmlFor="article-upvote">
+            <button
+              id="article-upvote"
+              onClick={() => {
+                upvoteArticle(articleId);
+                setVotes(votes + 1);
+              }}
+            >
+              upvote
+            </button>
+          </label>
+          <label htmlFor="article-downvote">
+            <button
+              id="article-downvote"
+              onClick={() => {
+                downvoteArticle(articleId);
+                setVotes(votes - 1);
+              }}
+            >
+              downvote
+            </button>
+          </label>
+        </li>
+        <li>{votes}</li>
+      </ul>
       <Comments articleId={articleId} />
     </div>
   );
