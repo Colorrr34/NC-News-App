@@ -17,6 +17,18 @@ header {
   border-bottom: solid darkmagenta;
 }
 
+#user-profile {
+  height: 50px;
+  width: auto;
+  margin: 10px;
+}
+
+header section {
+  align-self: center;
+  width: 150px;
+  display: flex;
+}
+
 /* main page */
 
 .body-container {
@@ -32,9 +44,13 @@ aside {
   grid-column: 1 / 2;
   grid-row: 1/2;
   position: fixed;
+  display: flex;
+  flex-wrap: wrap;
+  width: 170px;
 }
 
 aside ul {
+  width: 100%;
   list-style: none;
   padding-inline-start: 0px;
 }

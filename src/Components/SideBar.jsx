@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import fetchTopics from "../fetch/fetchTopics";
+import Footer from "./SideBarComponents/Footer";
 
 export default function SideBar() {
   const [topics, setTopics] = useState([]);
@@ -24,6 +25,8 @@ export default function SideBar() {
           );
         })}
       </ul>
+
+      <Footer />
     </aside>
   );
 }

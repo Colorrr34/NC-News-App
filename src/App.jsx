@@ -5,10 +5,9 @@ import "./App.css";
 import SideBar from "./Components/SideBar";
 import ArticleBody from "./Components/ArticleBody";
 import MainBody from "./Components/MainBody";
-import Footer from "./Components/Footer";
 
 function App() {
-  const [user, setUser] = useState("no user");
+  const [user, setUser] = useState("tickle122");
   return (
     <>
       <Header user={user} />
@@ -28,7 +27,6 @@ function App() {
           </Routes>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
