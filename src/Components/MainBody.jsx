@@ -6,7 +6,6 @@ import { Link } from "react-router";
 export default function MainBody() {
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState([]);
-  const [topics, setTopics] = useState([]);
 
   useEffect(() => {
     fetchArticles(page).then(({ data }) => {
@@ -14,28 +13,9 @@ export default function MainBody() {
     });
   }, []);
 
-  useEffect(() => {
-    fetchTopics().then(({ data }) => {
-      setTopics(data.topics);
-    });
-  });
-
   return (
     <>
-      <div className="main-body-container">
-        <aside key="topics-sidebar" id="topics-sidebar">
-          <ul key="topic-list">
-            {topics.map((topic) => {
-              return (
-                <li key={topic.slug}>
-                  <Link to={`/articles?topic=${topic.slug}`}>
-                    <p>{topic.slug}</p>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </aside>
+      <>
         <main key="articles">
           {articles.map((article) => {
             const date = new Date(article.created_at);
@@ -64,7 +44,7 @@ export default function MainBody() {
             );
           })}
         </main>
-      </div>
+      </>
     </>
   );
 }

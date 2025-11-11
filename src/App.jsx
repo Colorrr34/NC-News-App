@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./Components/Header";
 import { Routes, Route } from "react-router";
 import "./App.css";
+import SideBar from "./Components/SideBar";
 import ArticleBody from "./Components/ArticleBody";
 import MainBody from "./Components/MainBody";
 import Footer from "./Components/Footer";
@@ -11,17 +12,22 @@ function App() {
   return (
     <>
       <Header user={user} />
-      <Routes>
-        <Route path="/" element={<MainBody />} />
-        <Route
-          path="/articles/:id"
-          element={
-            <>
-              <ArticleBody />
-            </>
-          }
-        />
-      </Routes>
+      <div className="body-container">
+        <SideBar />
+        <div className="main-body">
+          <Routes>
+            <Route path="/" element={<MainBody />} />
+            <Route
+              path="/articles/:id"
+              element={
+                <>
+                  <ArticleBody />
+                </>
+              }
+            />
+          </Routes>
+        </div>
+      </div>
       <Footer />
     </>
   );
