@@ -34,7 +34,7 @@ export default function MainBody() {
 
   return (
     <>
-      <main key="articles" className="main-body">
+      <main key="articles" className="main-main">
         <label htmlFor="sort-by-selector">sort by: </label>
         <select
           id="sort-by-selector"
@@ -65,26 +65,28 @@ export default function MainBody() {
             const date = new Date(article.created_at);
 
             return (
-              <Link
-                to={`/articles/${article.article_id}`}
+              <section
+                className="main--article-section"
                 key={article.article_id}
               >
-                <section>
-                  <h2>{article.title}</h2>
-                  <p className="article-info">
-                    author: {article.author} | comments: {article.comment_count}{" "}
-                    | votes: {article.votes}
-                  </p>
-                  <p className="created-at">
-                    Created at: {date.toDateString()}
-                  </p>
-                  <img
-                    src={article.article_img_url}
-                    alt="article-image"
-                    className="homepage-article-image"
-                  />
-                </section>
-              </Link>
+                <Link to={`/articles/${article.article_id}`}>
+                  <div className="main--article-section-container">
+                    <h2>{article.title}</h2>
+                    <p className="article-info">
+                      author: {article.author} | comments:{" "}
+                      {article.comment_count} | votes: {article.votes}
+                    </p>
+                    <p className="created-at">
+                      Created at: {date.toDateString()}
+                    </p>
+                    <img
+                      src={article.article_img_url}
+                      alt="article-image"
+                      className="homepage-article-image"
+                    />
+                  </div>
+                </Link>
+              </section>
             );
           })
         )}

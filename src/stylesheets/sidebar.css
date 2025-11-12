@@ -1,0 +1,36 @@
+aside {
+  grid-column: 1 / 2;
+  grid-row: 1/2;
+  position: fixed;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  width: 170px;
+  height: 90vh;
+  border-right: solid;
+  padding: 10px;
+}
+
+aside ul {
+  width: 100%;
+  list-style: none;
+  padding-inline-start: 0px;
+}
+
+aside li {
+  padding: 5px;
+  border: 2px solid;
+  margin: 5px;
+  height: 20px;
+  align-self: center;
+}
+
+aside p {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+footer {
+  padding: 10px;
+  padding-bottom: 50px;
+}

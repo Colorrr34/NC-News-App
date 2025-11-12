@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import fetchTopics from "../fetch/fetchTopics";
-import Footer from "./SideBarComponents/Footer";
+import Footer from "./Footer";
+import "../stylesheets/sidebar.css";
 
 export default function SideBar() {
   const [topics, setTopics] = useState([]);

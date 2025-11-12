@@ -1,0 +1,37 @@
+/* header */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  padding: 10px;
+  overflow: hidden;
+  background-color: rgb(166, 166, 234);
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  border-bottom: solid darkmagenta;
+}
+
+.user-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 2px;
+  padding: 3px;
+  border-radius: 3%;
+}
+
+#user-profile {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: solid;
+  margin: 10px;
+}
+
+header section {
+  align-self: center;
+  width: 150px;
+  display: flex;
+}

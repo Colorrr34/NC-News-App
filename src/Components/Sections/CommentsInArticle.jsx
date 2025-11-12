@@ -2,7 +2,7 @@ import fetchArticleComments from "../../fetch/fetchArticleComments";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
-export default function ArticleComments(props) {
+export default function CommentsInArticle(props) {
   const { id: articleId } = useParams();
   const { newComment } = props;
 
@@ -46,18 +46,21 @@ export default function ArticleComments(props) {
   }, [newComment]);
 
   return (
-    <>
-      {comments.map((comment) => {
-        return (
-          <section key={comment.comment_id} className="comment-section">
-            <p className="username">author: {comment.author}</p>
-            <p className="comment-body">{comment.body}</p>
-            <p className="comment-info">
-              votes: {comment.votes} | {comment.created_at}
-            </p>
-          </section>
-        );
-      })}
-    </>
+    <div className="article article--section-3">
+      <p>Top Comments</p>
+      <ul>
+        {comments.map((comment) => {
+          return (
+            <li key={comment.comment_id} className="comment-section">
+              <p className="username">author: {comment.author}</p>
+              <p className="comment-body">{comment.body}</p>
+              <p className="comment-info">
+                votes: {comment.votes} | {comment.created_at}
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }

@@ -1,5 +1,4 @@
 import axios from "axios";
-import Comments from "../Components/ArticleComponents/ArticleComments";
 
 export default function postComment(text, user, articleId) {
   return axios.post(

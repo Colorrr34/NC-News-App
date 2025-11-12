@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import fetchUser from "../fetch/fetchUser";
+import "../stylesheets/header.css";
 
 export default function Header(props) {
   const { user } = props;

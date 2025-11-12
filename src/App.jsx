@@ -5,7 +5,7 @@ import "./App.css";
 import SideBar from "./Components/SideBar";
 import ArticleBody from "./Components/ArticleBody";
 import MainBody from "./Components/MainBody";
-import Comments from "./Components/CommentsComponents/Comments";
+import Comments from "./Components/Comments";
 
 function App() {
   const [user, setUser] = useState("tickle122");
