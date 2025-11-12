@@ -18,11 +18,9 @@ function App() {
         <div className="main-body">
           <Routes>
             <Route path="/" element={<MainBody />} />
-            <Route path="/articles" element={<MainBody />}>
-              <Route path=":id" element={<ArticleBody user={user} />}>
-                <Route path="comments" element={<Comments />} />
-              </Route>
-            </Route>
+            <Route path="/articles" element={<MainBody />} />
+            <Route path="/articles/:id" element={<ArticleBody user={user} />} />
+            <Route path="/articles/:id/comments" element={<Comments />} />
           </Routes>
         </div>
       </div>

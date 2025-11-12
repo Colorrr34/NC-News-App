@@ -69,7 +69,7 @@ export default function MainBody() {
                 to={`/articles/${article.article_id}`}
                 key={article.article_id}
               >
-                <section id={article.article_id}>
+                <section>
                   <h2>{article.title}</h2>
                   <p className="article-info">
                     author: {article.author} | comments: {article.comment_count}{" "}
