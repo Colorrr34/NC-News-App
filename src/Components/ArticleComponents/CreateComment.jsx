@@ -1,8 +1,18 @@
 import { useState } from "react";
+import { useParams } from "react-router";
+import postComment from "../../fetch/postComment";
 
 export default function CreateComment(props) {
-  const { user } = props;
+  const { id: articleId } = useParams();
+  const { user, setNewComment } = props;
   const [inputText, setInputText] = useState("");
+  const [ShowSubmitMessage, setShowSubmitMessage] = useState(false);
+
+  function submitComment(text) {
+    postComment(text, user, articleId).then(({ data }) => {
+      setNewComment(data);
+    });
+  }
 
   return (
     <>
@@ -17,9 +27,17 @@ export default function CreateComment(props) {
         ></textarea>
       </label>
       <label htmlFor="submit-comment" />
-      <button id="submit-comment" type="submit" value={inputText}>
+      <button
+        id="submit-comment"
+        type="submit"
+        onClick={(e) => {
+          submitComment(inputText, user, articleId);
+          setShowSubmitMessage(true);
+        }}
+      >
         Submit
       </button>
+      {ShowSubmitMessage ? <p>comment submitted!</p> : null}
     </>
   );
 }

@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router";
 import fetchArticle from "../fetch/fetchArticle";
 import { useState, useEffect } from "react";
 import Nav from "../Components/Nav";
-import Comments from "./ArticleComponents/Comments";
+import ArticleComments from "./ArticleComponents/ArticleComments";
 import CreateComment from "./ArticleComponents/CreateComment";
 import { upvoteArticle, downvoteArticle } from "../fetch/voteArticles";
 
@@ -20,6 +20,7 @@ export default function ArticleBody(props) {
   const [votes, setVotes] = useState(0);
 
   const [isCreatingComment, setIsCreatingComment] = useState(false);
+  const [newComment, setNewComment] = useState({});
 
   useEffect(() => {
     fetchArticle(articleId).then(({ data }) => {
@@ -57,49 +58,58 @@ export default function ArticleBody(props) {
         <img src={imageUrl} alt="article-image" />
         <p>{body}</p>
       </section>
-      <ul>
-        <li>
-          <Link to="comments">Read comments:({commentCount})</Link>
-        </li>
-        <li>
-          <label htmlFor="create-comment" />
-          <button
-            id="create-comment"
-            onClick={() => {
-              setIsCreatingComment(true);
-            }}
-          >
-            create a comment
-          </button>
-        </li>
-        <li>
-          <label htmlFor="article-upvote">
+      <ul id="list-under-article">
+        <span id="under-article-1">
+          <li>
+            <Link to="comments">Read comments:({commentCount})</Link>
+          </li>
+          <li>
+            <label htmlFor="create-comment" />
             <button
-              id="article-upvote"
+              id="create-comment"
               onClick={() => {
-                upvoteArticle(articleId);
-                setVotes(votes + 1);
+                setIsCreatingComment(true);
               }}
             >
-              upvote
+              create a comment
             </button>
-          </label>
-          <label htmlFor="article-downvote">
-            <button
-              id="article-downvote"
-              onClick={() => {
-                downvoteArticle(articleId);
-                setVotes(votes - 1);
-              }}
-            >
-              downvote
-            </button>
-          </label>
-        </li>
-        <li>{votes}</li>
+          </li>
+        </span>
+
+        <span id="under-article-2">
+          <li>
+            <label htmlFor="article-upvote">
+              <button
+                id="article-upvote"
+                onClick={() => {
+                  upvoteArticle(articleId);
+                  setVotes(votes + 1);
+                }}
+              >
+                upvote
+              </button>
+            </label>
+          </li>
+          <li>
+            <label htmlFor="article-downvote">
+              <button
+                id="article-downvote"
+                onClick={() => {
+                  downvoteArticle(articleId);
+                  setVotes(votes - 1);
+                }}
+              >
+                downvote
+              </button>
+            </label>
+          </li>
+          <li id="article-votes">votes: {votes}</li>
+        </span>
       </ul>
-      {isCreatingComment ? <CreateComment user={user} /> : null}
-      <Comments />
+      {isCreatingComment ? (
+        <CreateComment user={user} setNewComment={setNewComment} />
+      ) : null}
+      <ArticleComments newComment={newComment} />
     </div>
   );
 }

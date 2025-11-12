@@ -2,8 +2,9 @@ import fetchArticleComments from "../../fetch/fetchArticleComments";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
-export default function Comments(props) {
+export default function ArticleComments(props) {
   const { id: articleId } = useParams();
+  const { newComment } = props;
 
   const [comments, setComments] = useState([]);
 
@@ -24,6 +25,25 @@ export default function Comments(props) {
       setComments(commentsArray);
     });
   }, []);
+
+  useEffect(() => {
+    if (Object.keys(newComment).length > 0) {
+      const copy = structuredClone(comments);
+
+      const { created_at, ...otherProperties } = newComment;
+      const date = new Date(created_at);
+      const time = `${
+        date.getHours() > 10 ? date.getHours() : "0" + date.getHours()
+      }:${
+        date.getMinutes() > 10 ? date.getMinutes() : "0" + date.getMinutes()
+      } ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+
+      copy.unshift({ created_at: time, ...otherProperties });
+      copy.pop();
+
+      setComments(copy);
+    }
+  }, [newComment]);
 
   return (
     <>
