@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { Link } from "react-router";
 
-export default function PageList(props) {
-  const { pages, currentPage, topic } = props;
+export default function CommentsPageList(props) {
+  const { pages, currentPage } = props;
   return (
     <ul className="page-list">
       {pages.map((page) => {
@@ -11,10 +10,7 @@ export default function PageList(props) {
         }
         return (
           <li key={`main-page-${page}`}>
-            <Link
-              relative="path"
-              to={`?${topic === "all" ? "" : `topic=${topic}&`}p=${page}`}
-            >
+            <Link relative="path" to={`?p=${page}`}>
               {page}
             </Link>
           </li>

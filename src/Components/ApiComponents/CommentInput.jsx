@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router";
 import { postComment } from "../../API/post";
-import { UserContext } from "../../Provider/Provider";
+import { UsernameContext } from "../../Provider/Provider";
 import { useContext } from "react";
 
 export default function CommentInput(props) {
@@ -10,10 +10,10 @@ export default function CommentInput(props) {
   const [inputText, setInputText] = useState("");
   const [ShowSubmitMessage, setShowSubmitMessage] = useState(false);
 
-  const { user } = useContext(UserContext);
+  const { username } = useContext(UsernameContext);
 
   function submitComment(text) {
-    postComment(text, user, articleId).then(({ data }) => {
+    postComment(text, username, articleId).then(({ data }) => {
       setNewComment(data);
     });
   }
@@ -24,7 +24,7 @@ export default function CommentInput(props) {
         <textarea
           id="comment-input"
           type="text"
-          placeholder={`Commenting as ${user}`}
+          placeholder={`Commenting as ${username}`}
           onChange={(e) => {
             setInputText(e.target.value);
           }}
@@ -36,7 +36,7 @@ export default function CommentInput(props) {
         type="submit"
         onSubmit={(e) => {
           e.preventDefault();
-          submitComment(inputText, user, articleId);
+          submitComment(inputText, username, articleId);
           setShowSubmitMessage(true);
         }}
       >

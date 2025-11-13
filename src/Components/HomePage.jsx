@@ -1,8 +1,8 @@
 import { getArticles } from "../API/get";
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router";
-import MainSort from "./ApiComponents/MainSort";
-import PageList from "../Sections/PageList";
+import SortArticles from "../Sections/SortArticles";
+import ArticlesPageList from "../Sections/ArticlesPageList";
 
 export default function MainPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -37,7 +37,7 @@ export default function MainPage() {
   return (
     <>
       <main key="articles" className="main-main">
-        <MainSort setSortBy={setSortBy} setOrder={setOrder} />
+        <SortArticles setSortBy={setSortBy} setOrder={setOrder} />
         {isLoading ? (
           <section id="loading-section">
             <h2>Loading...</h2>
@@ -73,7 +73,11 @@ export default function MainPage() {
           })
         )}
 
-        <PageList pages={pages} currentPage={currentPage} topic={topic} />
+        <ArticlesPageList
+          pages={pages}
+          currentPage={currentPage}
+          topic={topic}
+        />
       </main>
     </>
   );

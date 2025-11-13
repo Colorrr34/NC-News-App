@@ -1,14 +1,14 @@
-import { useParams, Link, useSearchParams } from "react-router";
+import { useParams, useSearchParams } from "react-router";
 import { useState, useEffect, useContext } from "react";
 import { getCommentsByArticle, getArticle } from "../API/get";
 import ArticleSummary from "../Sections/ArticleSummary";
 import Nav from "./Nav";
-import DeleteComment from "./ApiComponents/DeleteComment";
+import SingleComment from "../Sections/SingleComment";
 import "../stylesheets/comments.css";
-import { UserContext } from "../Provider/Provider";
+import { UsernameContext } from "../Provider/Provider";
+import CommentsPageList from "../Sections/CommentsPageList";
 
 export default function Comments() {
-  const { user } = useContext(UserContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const { id: articleId } = useParams();
   const [currentPage, setCurrentPage] = useState(
@@ -64,38 +64,14 @@ export default function Comments() {
               <p>Comment deleted</p>
             </section>
           ) : (
-            <section
+            <SingleComment
+              comment={comment}
+              setDeletedComment={setDeletedComment}
               key={`comment-${comment.comment_id}`}
-              className="comment-section"
-            >
-              <p className="username">author: {comment.author}</p>
-              <p className="comment-body">{comment.body}</p>
-              <p className="comment-info">
-                votes: {comment.votes} | {comment.created_at}
-              </p>
-              {user === comment.author ? (
-                <DeleteComment
-                  commentId={comment.comment_id}
-                  setDeletedComment={setDeletedComment}
-                />
-              ) : null}
-            </section>
+            />
           );
         })}
-        <ul className="page-list">
-          {pages.map((page) => {
-            if (page === currentPage) {
-              return <li key="current-page">{page}</li>;
-            }
-            return (
-              <li key={`main-page-${page}`}>
-                <Link relative="path" to={`?p=${page}`}>
-                  {page}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <CommentsPageList pages={pages} currentPage={currentPage} />
       </main>
     </>
   );

@@ -2,13 +2,13 @@ import { getCommentsByArticle } from "../API/get";
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router";
-import { UserContext } from "../Provider/Provider";
+import { UsernameContext } from "../Provider/Provider";
 import DeleteComment from "../Components/ApiComponents/DeleteComment";
 
 export default function CommentsInArticle(props) {
   const { id: articleId } = useParams();
   const { newComment, commentCount } = props;
-  const { user } = useContext(UserContext);
+  const { username } = useContext(UsernameContext);
 
   const [comments, setComments] = useState([]);
 
@@ -61,7 +61,7 @@ export default function CommentsInArticle(props) {
               <p className="comment-info">
                 votes: {comment.votes} | {comment.created_at}
               </p>
-              {user === comment.author ? (
+              {username === comment.author ? (
                 <DeleteComment commentId={comment.comment_id} />
               ) : null}
             </li>

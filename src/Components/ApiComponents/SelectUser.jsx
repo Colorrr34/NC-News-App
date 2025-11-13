@@ -1,9 +1,9 @@
-import { UserContext } from "../../Provider/Provider";
+import { UsernameContext } from "../../Provider/Provider";
 import { useEffect, useState, useContext } from "react";
 import { getUsers } from "../../API/get";
 
 export default function SelectUser() {
-  const { setUser } = useContext(UserContext);
+  const { setUsername } = useContext(UsernameContext);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function SelectUser() {
       <select
         className="header-user-list"
         onChange={(e) => {
-          setUser(e.target.value);
+          setUsername(e.target.value);
         }}
       >
         {users.map((user) => {

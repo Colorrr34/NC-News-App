@@ -1,4 +1,4 @@
-export default function MainSort(props) {
+export default function SortArticles(props) {
   const { setOrder, setSortBy } = props;
   return (
     <section className="main--sort-section">

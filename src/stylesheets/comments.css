@@ -25,3 +25,32 @@
   grid-row: 1/3;
   grid-column: 3 / span 1;
 }
+
+.single-comment-bottom-section {
+  height: 30px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  align-items: center;
+}
+
+.comment-section-votes {
+  display: flex;
+  align-items: center;
+  grid-column: 3/4;
+  height: 30px;
+  align-self: flex-start;
+}
+
+.comment-created-at {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.single-comment-comment-section {
+  height: 120px;
+  border: 2px solid;
+  padding: 10px;
+  border-radius: 5px;
+  padding-left: 10px;
+  margin-top: 10px;
+}

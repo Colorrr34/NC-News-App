@@ -2,19 +2,19 @@ import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router";
 import { getUser } from "../API/get";
 import "../stylesheets/header.css";
-import { UserContext } from "../Provider/Provider";
+import { UsernameContext } from "../Provider/Provider";
 import SelectUser from "./ApiComponents/SelectUser";
 
 export default function Header() {
-  const { user } = useContext(UserContext);
+  const { username } = useContext(UsernameContext);
 
   const [avatarUrl, setAvatarUrl] = useState(null);
 
   useEffect(() => {
-    getUser(user).then(({ data: { user: userData } }) => {
+    getUser(username).then(({ data: { user: userData } }) => {
       setAvatarUrl(userData.avatar_url);
     });
-  }, [user]);
+  }, [username]);
 
   return (
     <header>
@@ -24,7 +24,7 @@ export default function Header() {
       <section className="header--user-section">
         <SelectUser />
         <section className="user-banner">
-          <p>{user}</p>
+          <p>{username}</p>
           <img
             src={avatarUrl}
             alt="user-avatar-picture"
